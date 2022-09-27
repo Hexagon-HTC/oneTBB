@@ -33,10 +33,20 @@
 # (via -D__TBB_DYNAMIC_LOAD_ENABLED=0 and LIBDL emptied) primarily for performance.
 
 # OS specific settings =>
-    LIB_LINK_CMD = ar rcs
+    ifeq ($(tbb_os),linux)
+        LIB_LINK_CMD = ar rcs
+        LIBPREF = lib
+        LIBEXT = a
+        LIB_OUTPUT_KEY =
+    endif
+    ifeq ($(tbb_os),windows)
+        LIB_LINK_CMD = lib
+        LIBPREF = 
+        LIBEXT = lib
+        LIB_OUTPUT_KEY =/OUT:
+    endif
     LIB_LINK_FLAGS =
     LIB_LINK_LIBS =
-    LIB_OUTPUT_KEY =
     DYLIB_KEY =
     ifeq ($(tbb_os),linux)
         ifeq ($(compiler),clang)
@@ -53,8 +63,6 @@
     override CXXFLAGS += -D__TBB_DYNAMIC_LOAD_ENABLED=0 -D__TBB_SOURCE_DIRECTLY_INCLUDED=1
     ITT_NOTIFY =
     DLL = a
-    LIBEXT = a
-    LIBPREF = lib
     LIBDL =
 # <= OS specific settings
 
