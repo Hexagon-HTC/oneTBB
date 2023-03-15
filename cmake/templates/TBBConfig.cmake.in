@@ -96,3 +96,5 @@ list(REMOVE_DUPLICATES TBB_IMPORTED_TARGETS)
 unset(_tbb_release_lib)
 unset(_tbb_debug_lib)
 unset(_tbb_root)
+
+find_package(Threads REQUIRED)
