@@ -29,7 +29,7 @@ namespace d1 {
 struct intrusive_list_node {
     intrusive_list_node* my_prev_node{};
     intrusive_list_node* my_next_node{};
-#if TBB_USE_ASSERT
+#ifdef TBB_USE_ASSERT
     intrusive_list_node() { my_prev_node = my_next_node = this; }
 #endif /* TBB_USE_ASSERT */
 };
